@@ -57,3 +57,10 @@ typings/
 # dotenv environment variables file
 .env
 
+#JetBrains IDE's files
+.idea/
+
+#Sublime files
+node-microservices.sublime-project
+
+package-lock.json
