@@ -10,8 +10,10 @@
   "author": "Rodrigo Sasaki",
   "license": "ISC",
   "dependencies": {
+    "mongodb": "^2.2.33",
     "mysql": "^2.15.0",
     "restify": "^6.0.1",
+    "restify-cors-middleware": "^1.0.1",
     "restify-errors": "^5.0.0",
     "winston": "^2.4.0"
   },
