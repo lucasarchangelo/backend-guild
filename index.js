@@ -27,10 +27,12 @@ server.use(Validations.enforceContentType);
 
 server.get('/users', UserManagementServer.listAll);
 server.post('/users', UserManagementServer.createUser);
-server.put('users/member/:userId', UserManagementServer.updatePlayerToMember);
-server.put('users/adm/:userId', UserManagementServer.updatePlayerToAdm);
+server.del('/users/:userId', UserManagementServer.deleteUser);
+server.put('/users/:userId/:roleId', UserManagementServer.updatePlayerRole);
+//server.put('/users/member/:userId', UserManagementServer.updatePlayerToMember);
+//server.put('/users/adm/:userId', UserManagementServer.updatePlayerToAdm);
 //server.put('/users/:userId', UserManagementServer.updateUser);
-//server.del('/users/:userId', UserManagementServer.deleteUser);
+
 
 server.listen(8080, function () {
   logger.info('%s listening at %s', server.name, server.url);
