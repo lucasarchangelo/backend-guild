@@ -27,6 +27,8 @@ server.use(Validations.enforceContentType);
 
 server.get('/users', UserManagementServer.listAll);
 server.post('/users', UserManagementServer.createUser);
+server.put('users/member/:userId', UserManagementServer.updatePlayerToMember);
+server.put('users/adm/:userId', UserManagementServer.updatePlayerToAdm);
 //server.put('/users/:userId', UserManagementServer.updateUser);
 //server.del('/users/:userId', UserManagementServer.deleteUser);
 
