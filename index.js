@@ -15,7 +15,7 @@ const server = restify.createServer({
 const cors = corsMiddleware({
   origins: ['http://localhost:4200'],
   allowHeaders: ['API-Token'],
-  exposeHeaders: ['API-Token-Expiry']
+  exposeHeaders: ['API-Token-Expiry'],
 });
 
 server.pre(cors.preflight);
