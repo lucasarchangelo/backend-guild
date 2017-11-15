@@ -25,7 +25,7 @@ server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 server.use(Validations.enforceContentType);
 
-server.use('/users/login', UserManagementServer.login);
+server.post('/users/login', UserManagementServer.login);
 server.get('/users', UserManagementServer.verifyToken, UserManagementServer.listAll);
 server.post('/users', UserManagementServer.createUser);
 server.del('/users/:userId',  UserManagementServer.verifyToken, UserManagementServer.deleteUser);
