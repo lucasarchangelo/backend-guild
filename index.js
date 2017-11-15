@@ -1,11 +1,13 @@
 // NPM packages
 const restify = require('restify');
 const corsMiddleware = require('restify-cors-middleware');
+const verifyToken = require('./verifyToken');
 
 // Module packages
 const UserManagementServer = require('./lib/user_management_server');
 const Validations = require('./lib/validations');
 const logger = require('./lib/log');
+const authController = require('./auth/authController');
 
 const server = restify.createServer({
   name: 'UserManagementServer',
@@ -18,6 +20,7 @@ const cors = corsMiddleware({
   exposeHeaders: ['API-Token-Expiry'],
 });
 
+server.use('/users/auth', authController);
 server.pre(cors.preflight);
 server.use(cors.actual);
 server.use(restify.plugins.acceptParser(['application/json']));
@@ -25,10 +28,10 @@ server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 server.use(Validations.enforceContentType);
 
-server.get('/users', UserManagementServer.listAll);
+server.get('/users', verifyToken, UserManagementServer.listAll);
 server.post('/users', UserManagementServer.createUser);
-server.del('/users/:userId', UserManagementServer.deleteUser);
-server.put('/users/:userId/:roleId', UserManagementServer.updatePlayerRole);
+server.del('/users/:userId',  verifyToken, UserManagementServer.deleteUser);
+server.put('/users/:userId/:roleId', verifyToken, UserManagementServer.updatePlayerRole);
 //server.put('/users/member/:userId', UserManagementServer.updatePlayerToMember);
 //server.put('/users/adm/:userId', UserManagementServer.updatePlayerToAdm);
 //server.put('/users/:userId', UserManagementServer.updateUser);
