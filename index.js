@@ -17,8 +17,6 @@ const cors = corsMiddleware({
   allowHeaders: ['API-Token', 'Access-Control-Allow-Headers', 'x-access-token'],
   exposeHeaders: ['API-Token-Expiry'],
 });
-//Heroku config
-server.set('port', (process.env.PORT || 5000));
 
 server.pre(cors.preflight);
 server.use(cors.actual);
@@ -37,6 +35,6 @@ server.put('/users/:userId/:roleId', UserManagementServer.verifyToken, UserManag
 //server.put('/users/:userId', UserManagementServer.updateUser);
 
 
-server.listen(8080, function () {
+server.listen(process.env.PORT || 5000, function () {
   logger.info('%s listening at %s', server.name, server.url);
 });
