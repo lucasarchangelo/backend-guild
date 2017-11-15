@@ -20,7 +20,6 @@ const cors = corsMiddleware({
   exposeHeaders: ['API-Token-Expiry'],
 });
 
-server.use('/users/auth', authController);
 server.pre(cors.preflight);
 server.use(cors.actual);
 server.use(restify.plugins.acceptParser(['application/json']));
@@ -28,6 +27,7 @@ server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 server.use(Validations.enforceContentType);
 
+server.use('/users/auth', authController);
 server.get('/users', verifyToken, UserManagementServer.listAll);
 server.post('/users', UserManagementServer.createUser);
 server.del('/users/:userId',  verifyToken, UserManagementServer.deleteUser);
