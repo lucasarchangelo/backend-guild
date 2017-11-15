@@ -10,6 +10,8 @@
   "author": "Rodrigo Sasaki",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.1.0",
     "mongodb": "^2.2.33",
     "mongoose": "^4.13.2",
     "mysql": "^2.15.0",
