@@ -13,7 +13,7 @@ const server = restify.createServer({
 });
 
 const cors = corsMiddleware({
-  origins: ['http://localhost:4200'],
+  origins: ['https://portal-guild.herokuapp.com'],
   allowHeaders: ['API-Token', 'Access-Control-Allow-Headers', 'x-access-token'],
   exposeHeaders: ['API-Token-Expiry'],
 });
