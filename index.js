@@ -10,7 +10,7 @@ const Validations = require('./lib/validations');
 const logger = require('./lib/log');
 
 const server = restify.createServer({
-  name: 'UserManagementServer',
+  name: 'GuildManagementServer',
   version: '1.0.0',
 });
 
