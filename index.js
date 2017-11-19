@@ -3,7 +3,9 @@ const restify = require('restify');
 const corsMiddleware = require('restify-cors-middleware');
 
 // Module packages
-const UserManagementServer = require('./lib/user_management_server');
+const UserManagementServer = require('./lib/service/user_management_server');
+const GuildManagementServer = require('./lib/service/guild_management_server');
+const EventManagementServer = require('./lib/service/event_management_server');
 const Validations = require('./lib/validations');
 const logger = require('./lib/log');
 
@@ -25,14 +27,11 @@ server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 server.use(Validations.enforceContentType);
 
-server.post('/users/login', UserManagementServer.login);
-server.get('/users', UserManagementServer.verifyToken, UserManagementServer.listAll);
-server.post('/users', UserManagementServer.createUser);
-server.del('/users/:userId',  UserManagementServer.verifyToken, UserManagementServer.deleteUser);
-server.put('/users/:userId/:roleId', UserManagementServer.verifyToken, UserManagementServer.updatePlayerRole);
-//server.put('/users/member/:userId', UserManagementServer.updatePlayerToMember);
-//server.put('/users/adm/:userId', UserManagementServer.updatePlayerToAdm);
-//server.put('/users/:userId', UserManagementServer.updateUser);
+server.post('guild/login', GuildManagementServer.login);
+server.post('guild/users', GuildManagementServer.createUser);
+server.get('guild/users', GuildManagementServer.verifyToken, UserManagementServer.listAll);
+server.del('guild/users/:userId',  GuildManagementServer.verifyToken, UserManagementServer.deleteUser);
+server.put('guild/users/:userId/:roleId', GuildManagementServer.verifyToken, UserManagementServer.updatePlayerRole);
 
 
 server.listen(process.env.PORT || 5000, function () {
