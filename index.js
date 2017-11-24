@@ -27,18 +27,20 @@ server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 server.use(Validations.enforceContentType);
 
-//Guild security && new member
+//Guild ( no security )
 server.post('guild/login', GuildManagementServer.login);
 server.post('guild/users', GuildManagementServer.createUser);
+
+//Users
 server.get('guild/users', GuildManagementServer.verifyAdmToken, UserManagementServer.listAll);
 server.del('guild/users/:userId',  GuildManagementServer.verifyAdmToken, UserManagementServer.deleteUser);
 server.put('guild/users/:userId/:roleId', GuildManagementServer.verifyAdmToken, UserManagementServer.updatePlayerRole);
 
-//Events Adm and players roles
-server.post('guild/events', GuildManagementServer.verifyAdmToken, EventManagementServer.createEvent);
+//Events
+server.post('guild/events', GuildManagementServer.verifyUserToken, EventManagementServer.createEvent);
 server.get('guild/events', GuildManagementServer.verifyUserToken, EventManagementServer.listAll);
-server.put('guild/events/:eventId', GuildManagementServer.verifyUserToken, EventManagementServer.updateEvent);
-
+server.del('guild/events/:eventId', GuildManagementServer.verifyUserToken, EventManagementServer.deleteEvent);
+server.put('guild/events/:eventId/join', GuildManagementServer.verifyUserToken, EventManagementServer.includePlayerEvent);
 
 server.listen(process.env.PORT || 5000, function () {
   logger.info('%s listening at %s', server.name, server.url);
