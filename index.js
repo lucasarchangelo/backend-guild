@@ -40,7 +40,8 @@ server.put('guild/users/:userId/:roleId', GuildManagementServer.verifyAdmToken, 
 server.post('guild/events', GuildManagementServer.verifyUserToken, EventManagementServer.createEvent);
 server.get('guild/events', GuildManagementServer.verifyUserToken, EventManagementServer.listAll);
 server.del('guild/events/:eventId', GuildManagementServer.verifyUserToken, EventManagementServer.deleteEvent);
-server.put('guild/events/:eventId/join', GuildManagementServer.verifyUserToken, EventManagementServer.includePlayerEvent);
+server.put('guild/events/:eventId/subscribe', GuildManagementServer.verifyUserToken, EventManagementServer.includePlayerEvent);
+server.put('guild/events/:eventId/unsubscribe', GuildManagementServer.verifyUserToken, EventManagementServer.exludePlayerEvent);
 
 server.listen(process.env.PORT || 5000, function () {
   logger.info('%s listening at %s', server.name, server.url);
