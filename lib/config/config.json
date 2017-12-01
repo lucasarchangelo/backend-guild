@@ -1,0 +1,12 @@
+{
+  "test": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://localhost:27017/GuildTest",
+    "JWT_SECRET": ".mu2cnF2hYpwpJmDdzjr]vt8<ktj-cZ."
+  },
+  "development": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://localhost:27017/Guild",
+    "JWT_SECRET": "n@vcq69setJJrySsUcx<ifyvrj6[Nt"
+  }
+}

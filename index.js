@@ -1,3 +1,5 @@
+require('./lib/config/config');
+
 // NPM packages
 const restify = require('restify');
 const corsMiddleware = require('restify-cors-middleware');
@@ -43,6 +45,8 @@ server.del('guild/events/:eventId', GuildManagementServer.verifyUserToken, Event
 server.put('guild/events/:eventId/subscribe', GuildManagementServer.verifyUserToken, EventManagementServer.includePlayerEvent);
 server.put('guild/events/:eventId/unsubscribe', GuildManagementServer.verifyUserToken, EventManagementServer.exludePlayerEvent);
 
-server.listen(process.env.PORT || 5000, function () {
+server.listen(process.env.PORT, function () {
   logger.info('%s listening at %s', server.name, server.url);
 });
+
+module.exports = { server };
