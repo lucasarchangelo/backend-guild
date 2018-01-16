@@ -6,6 +6,8 @@ const corsMiddleware = require('restify-cors-middleware');
 const UserManagementServer = require('./lib/service/user_management_server');
 const GuildManagementServer = require('./lib/service/guild_management_server');
 const EventManagementServer = require('./lib/service/event_management_server');
+const GameManagementServer = require('./lib/service/game_management_server');
+const PendencyManagementServer = require('./lib/service/pendency_management_server');
 const Validations = require('./lib/validations');
 const logger = require('./lib/log');
 
@@ -42,6 +44,18 @@ server.get('guild/events', GuildManagementServer.verifyUserToken, EventManagemen
 server.del('guild/events/:eventId', GuildManagementServer.verifyUserToken, EventManagementServer.deleteEvent);
 server.put('guild/events/:eventId/subscribe', GuildManagementServer.verifyUserToken, EventManagementServer.includePlayerEvent);
 server.put('guild/events/:eventId/unsubscribe', GuildManagementServer.verifyUserToken, EventManagementServer.exludePlayerEvent);
+
+//Game
+server.post('guild/games', GuildManagementServer.verifyAdmToken, GameManagementServer.createGame);
+server.get('guild/games', GuildManagementServer.verifyAdmToken, GameManagementServer.listAll);
+server.del('guild/games/:gameId',  GuildManagementServer.verifyAdmToken, GameManagementServer.deleteGame);
+
+//Pendency
+server.post('guild/pendencies', GuildManagementServer.verifyUserToken, PendencyManagementServer.createPendency);
+server.get('guild/pendencies', GuildManagementServer.verifyUserToken, PendencyManagementServer.listByGame);
+server.del('guild/pendencies/:pendencyId', GuildManagementServer.verifyAdmToken, PendencyManagementServer.deletePendency);
+server.put('guild/pendencies/:pendencyId/subscribe', GuildManagementServer.verifyUserToken, PendencyManagementServer.includePlayerPendency);
+server.put('guild/pendencies/:pendencyId/unsubscribe', GuildManagementServer.verifyUserToken, PendencyManagementServer.excludePlayerPendency);
 
 server.listen(process.env.PORT || 5000, function () {
   logger.info('%s listening at %s', server.name, server.url);
