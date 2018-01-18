@@ -52,7 +52,7 @@ server.del('guild/games/:gameId',  GuildManagementServer.verifyAdmToken, GameMan
 
 //Pendency
 server.post('guild/pendencies', GuildManagementServer.verifyUserToken, PendencyManagementServer.createPendency);
-server.get('guild/pendencies', GuildManagementServer.verifyUserToken, PendencyManagementServer.listByGame);
+server.get('guild/pendencies/:gameId', GuildManagementServer.verifyUserToken, PendencyManagementServer.listByGame);
 server.del('guild/pendencies/:pendencyId', GuildManagementServer.verifyAdmToken, PendencyManagementServer.deletePendency);
 server.put('guild/pendencies/:pendencyId/subscribe', GuildManagementServer.verifyUserToken, PendencyManagementServer.includePlayerPendency);
 server.put('guild/pendencies/:pendencyId/unsubscribe', GuildManagementServer.verifyUserToken, PendencyManagementServer.excludePlayerPendency);
