@@ -47,7 +47,7 @@ server.put('guild/events/:eventId/unsubscribe', GuildManagementServer.verifyUser
 
 //Game
 server.post('guild/games', GuildManagementServer.verifyAdmToken, GameManagementServer.createGame);
-server.get('guild/games', GuildManagementServer.verifyAdmToken, GameManagementServer.listAll);
+server.get('guild/games', GuildManagementServer.verifyUserToken, GameManagementServer.listAll);
 server.del('guild/games/:gameId',  GuildManagementServer.verifyAdmToken, GameManagementServer.deleteGame);
 
 //Pendency
